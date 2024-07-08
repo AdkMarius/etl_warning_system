@@ -1,0 +1,7 @@
+diseaseId,diseaseCode,diseaseDisplayName,indicatorDisplayName,dataElementId,dataElementDisplayName,dataSetId,dataSetPeriod,createdDate
+1,A00,Cholera,DailyRecoveredt,H5GIB0A5Pyt,Cholera DailyRecoveredt,rTPYTgYoxAQ,Daily,2024-06-25 11:51:45.857334
+1,A00,Cholera,Deaths,miZ7nLeBp1w,IDS - Cholera (Deaths),ZyZmZTUwctj,Weekly,2024-06-25 11:52:12.322164
+1,A00,Cholera,Suspected,Sc5efRwnOA9,IDS - Cholera (Suspected cases),ZyZmZTUwctj,Weekly,2024-06-25 11:52:55.204588
+111,A20,Plague,Confirmed,iuh5hm4RVBR,IDS - Plague (Confirmed cases),OTvkNTijYQY,Weekly,2024-07-02 08:22:05.194090
+115,A20.3,Plague meningitis,Deaths,qqqAULiKFu2,IDS - Plague (Deaths),ZyZmZTUwctj,Weekly,2024-07-02 08:22:23.763860
+4,A00.9,"Cholera, unspecified",dHSI,miZ7nLeBp1w,IDS - Cholera (Deaths),ZyZmZTUwctj,Weekly,2024-07-08 12:52:04.894104
