@@ -1,16 +1,15 @@
 from flask import (
-    Blueprint, flash, g, request, url_for, jsonify
+    Blueprint, request, jsonify
 )
-from werkzeug.exceptions import abort
-
 import requests
-import logging
-from datetime import datetime
 from requests.auth import HTTPBasicAuth
 
+import logging
+from datetime import datetime
+
 from warning_system import config
-from warning_system.models import datas, ids
-from warning_system.custom import error, utils
+from warning_system.models import datas
+from warning_system.custom import error
 
 bp = Blueprint('newIndicator', __name__, url_prefix='/api')
 filename = "static/dataorg.csv"
@@ -22,16 +21,19 @@ s.auth = HTTPBasicAuth(username="admin", password="district")
 
 @bp.route("/dataElements", methods=['GET'])
 def get_data_elements():
+    # provide all data elements in dhis2
     try:
         if request.args.get('filter') is not None:
             filter_string = request.args.get('filter')
             api_url = config.api_url + f"/dataElements?filter=displayName:ilike:{filter_string}"
             result = datas.fetch_from_dhis2(api_url)
+            logging.info("filtered dataElements fetched successfully")
             return jsonify(result)
         else:
             page = int(request.args.get("page", 1))
             api_url = config.api_url + f"/dataElements?page={page}"
             result = datas.fetch_from_dhis2(api_url)
+            logging.info("dataElements fetched successfully")
             return jsonify(result)
     except error.APIError as e:
         logging.error(f"APIError: {e}")
@@ -39,6 +41,8 @@ def get_data_elements():
 
 @bp.route("/diseases", methods=['GET'])
 def get_diseases():
+    # provide all infectious and notifiable diseases with pagination
+
     # Get pagination parameters from the request
     page = int(request.args.get('page', 1))
     limit = int(request.args.get('limit', 25))
@@ -57,6 +61,7 @@ def get_diseases():
             }
             for paginated_disease in paginated_diseases
         ]
+        logging.info("disease list fetched successfully")
     elif request.args.get('filter') is not None:
         filter_value = request.args.get('filter')
         filter_type = request.args.get('filterType')
@@ -72,6 +77,7 @@ def get_diseases():
             }
             for paginated_disease in paginated_diseases
         ]
+        logging.info("filtered disease list fetched successfully")
 
     # Create the response with pagination info
     response = {
@@ -90,6 +96,8 @@ def get_diseases():
 
 @bp.route("/indicators", methods=['GET'])
 def get_indicators():
+    # provide all information about the indicators
+
     page_size = 25
     page = request.args.get("page", 1, type=int)
     offset = (page - 1) * page_size
@@ -131,8 +139,10 @@ def get_indicators():
         response["dataElements"] = data
     elif request.args.get('filter') is not None:
         response["dataElements"] = filtered_indicators
+        logging.info("filtered indicators fetched with success")
     else:
         response["dataElements"] = data_formatted
+        logging.info("indicators fetched with success")
 
     response["pager"] = pager
 
@@ -141,24 +151,29 @@ def get_indicators():
 
 @bp.route('/create-new-indicator', methods=['POST'])
 def create_new_indicator():
+    # save the new indicator created by the user in the indicator.csv
+
     req_data = request.get_json()
 
-    # fetch the dataSets related to the selected dataElements
-    api_url = config.api_url + f"/dataSets?filter=dataSetElements.dataElement.id:eq:{req_data['dataElement']['id']}"
-    result = datas.fetch_from_dhis2(api_url)
-    if len(result['dataSets']) >= 1:
-        data_set = result['dataSets'][0]
-    else:
-        return jsonify({
-            'httpStatus': 'Not Found',
-            'httpStatusCode': 404,
-            'message': 'Dataset is not found for this dataElement!'
-        })
+    # set the two data sets for weekly and daily data
+    data_sets = [
+        {
+            "displayName": "IDS daily - Report: Suspected, Confirm, Death, Recovered",
+            "id": "rTPYTgYoxAQ"
+        },
+        {
+            "displayName": "IDS - Report: Suspected, Confirm, Death",
+            "id": "ZyZmZTUwctj"
+        }
+    ]
 
-    # get the periodType of the dataSets
-    api_url = config.api_url + f'/dataSets/{data_set["id"]}'
-    result = datas.fetch_from_dhis2(api_url)
-    period_type = result['periodType']
+    # define the periodType and the dataSets according to the period
+    if 'daily' in req_data['indicator']['displayName'].lower():
+        data_set = data_sets[0]
+        period_type = "Daily"
+    else:
+        data_set = data_sets[1]
+        period_type = "Weekly"
 
     indicator_data = {
         "diseaseId": req_data['disease']['id'],
@@ -174,12 +189,14 @@ def create_new_indicator():
 
     try:
         datas.store_data_indicator(indicator_data)
+        logging.info("new indicator created successfully at {}".format(datetime.now()))
         return jsonify({
             'httpStatus': 'Successfully',
             'httpStatusCode': 200,
             'message': 'Data scheduled with success!'
         })
     except Exception as e:
+        logging.error(f"error server while creating new indicator: {e}")
         return jsonify({
             'httpStatus': 'Failed',
             'httpStatusCode': 500,

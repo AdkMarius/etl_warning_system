@@ -1,7 +1,7 @@
 diseaseId,diseaseCode,diseaseDisplayName,indicatorDisplayName,dataElementId,dataElementDisplayName,dataSetId,dataSetPeriod,createdDate
-1,A00,Cholera,DailyRecoveredt,H5GIB0A5Pyt,Cholera DailyRecoveredt,rTPYTgYoxAQ,Daily,2024-06-25 11:51:45.857334
-1,A00,Cholera,Deaths,miZ7nLeBp1w,IDS - Cholera (Deaths),ZyZmZTUwctj,Weekly,2024-06-25 11:52:12.322164
-1,A00,Cholera,Suspected,Sc5efRwnOA9,IDS - Cholera (Suspected cases),ZyZmZTUwctj,Weekly,2024-06-25 11:52:55.204588
-111,A20,Plague,Confirmed,iuh5hm4RVBR,IDS - Plague (Confirmed cases),OTvkNTijYQY,Weekly,2024-07-02 08:22:05.194090
-115,A20.3,Plague meningitis,Deaths,qqqAULiKFu2,IDS - Plague (Deaths),ZyZmZTUwctj,Weekly,2024-07-02 08:22:23.763860
-4,A00.9,"Cholera, unspecified",dHSI,miZ7nLeBp1w,IDS - Cholera (Deaths),ZyZmZTUwctj,Weekly,2024-07-08 12:52:04.894104
+1,A00,Cholera,Confirmed,FTWXeWdPdVH,IDS - Cholera (Confirmed cases),ZyZmZTUwctj,Weekly,2024-07-10 13:04:52.973502
+1,A00,Cholera,DailyDeath,SYrUS9vk2M6,Cholera DailyDeatht,rTPYTgYoxAQ,Daily,2024-07-10 13:05:04.965128
+1,A00,Cholera,hPORt,JAlFAFRC93j,Cholera hPORt,ZyZmZTUwctj,Weekly,2024-07-10 13:05:14.100314
+3,A00.1,"Cholera due to Vibrio cholerae 01, biovar eltor",PHC,uffXT4R7xtc,Cholera PHC,ZyZmZTUwctj,Weekly,2024-07-10 13:05:25.453341
+425,A90,Dengue fever [classical dengue],Suspected,wryMP8p8k1C,IDS - Dengue Fever (Suspected cases),ZyZmZTUwctj,Weekly,2024-07-10 14:10:44.186696
+1,A00,Cholera,Suspected,Sc5efRwnOA9,IDS - Cholera (Suspected cases),ZyZmZTUwctj,Weekly,2024-07-15 11:55:21.477081
