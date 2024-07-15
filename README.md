@@ -57,7 +57,14 @@ You should ensure every ports configuration is correct. For that see in Docker d
 docker ps
 ```
 
-After all of this, in the backend project, install all the dependencies in the `requirements.txt` file.
+After all of this, in the backend project, install all the dependencies in the `requirements.txt` file. Here are some instructions:
+
+```bash
+python -m venv .venv  # To create a virtual environment
+python .venv\Scripts\activate  # To activate the virtual environment
+pip install -r requirements.txt  # Ensure you have pip installed
+python main.py  # To run the backend project
+```
 
 In the frontend project, tape these commands:
 
@@ -66,4 +73,4 @@ npm install
 npm run dev
 ```
 
-After install all of the dependencies as described earlier, you should be able to use it.
+After install all of the dependencises for the project, you should be able to use it.
