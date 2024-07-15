@@ -3,6 +3,8 @@ backend/.env
 backend/.env.local
 backend/.idea
 backend/.venv
+backend/logs
+*/__pycache__
 
 
 # frontend
