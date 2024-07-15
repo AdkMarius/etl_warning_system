@@ -7,14 +7,7 @@ import {ArrowUpRightIcon} from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import {DataModel, SelectedData} from "@/lib/datas-definition";
 import {CustomDialog} from "@/components";
-
-export type ErrorType = 'empty' | 'submitting' | 'success' | 'error';
-
-export type SubmitResponse = {
-    httpStatus: string;
-    httpStatusCode: number;
-    message: string;
-}
+import {ErrorType, SubmitResponse} from "@/lib/props-definitions";
 
 function ContainerTable() {
     const initialValue: DataModel = {
@@ -67,7 +60,7 @@ function ContainerTable() {
                 }
             });
             if (res.ok) {
-                const result = await res.json();
+                const result: SubmitResponse = await res.json();
                 if (result.httpStatusCode === 200) {
                     setStatus("success");
                     setMessage(result.message)

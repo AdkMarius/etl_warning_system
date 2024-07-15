@@ -7,6 +7,8 @@ export type H2HeadingProps = {
 
 export type dType = "diseases" | "dataElements" | "indicators";
 
+export type ErrorType = 'empty' | 'submitting' | 'success' | 'error';
+
 export type SearchBarProps = {
     dType: dType;
     placeholder: string;
@@ -30,4 +32,22 @@ export type FetchDataProps = {
     query: string;
     filterType?: string;
     url: string;
+}
+
+export type SubmitResponse = {
+    httpStatus: string;
+    httpStatusCode: number;
+    message: string;
+}
+
+export type TableDataProps = {
+    status: string;
+    items: DataModel[];
+    selectedItem: DataModel;
+    handleClick: (item: DataModel) => void;
+}
+
+export type ButtonProps = {
+    buttonText: string;
+    handleClick: () => void;
 }

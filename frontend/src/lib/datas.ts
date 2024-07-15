@@ -1,5 +1,4 @@
 import {SelectedData} from "@/lib/datas-definition";
-import axios from "axios";
 
 const api_url = process.env.API_URL;
 

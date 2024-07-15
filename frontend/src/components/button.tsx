@@ -1,11 +1,7 @@
 import React from "react";
-import clsx from "clsx";
-import {ArrowUpRightIcon} from "@heroicons/react/24/solid";
+import {ButtonProps} from "@/lib/props-definitions";
 
-export type ButtonProps = {
-    buttonText: string;
-    handleClick: () => void;
-}
+
 function Button(props: ButtonProps) {
     const {
         buttonText,

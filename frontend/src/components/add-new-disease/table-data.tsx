@@ -1,15 +1,8 @@
 'use client';
 
 import React from "react";
-import {DataModel} from "@/lib/datas-definition";
 import clsx from "clsx";
-
-export type TableDataProps = {
-    status: string;
-    items: DataModel[];
-    selectedItem: DataModel;
-    handleClick: (item: DataModel) => void;
-}
+import {TableDataProps} from "@/lib/props-definitions";
 
 function TableData(props: TableDataProps) {
     const {
